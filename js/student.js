@@ -42,36 +42,45 @@ async function createRequest(e) {
     btn.disabled = true;
     btn.innerText = 'Enviando ao servidor...';
     
-    // Inserção em Requests (agora com Categoria)
-    const { data: reqData, error: reqError } = await supabase
-        .from('requests')
-        .insert([{ user_id: currentUser.id, title: title, description: desc, category: category }])
-        .select();
+    try {
+        // Inserção em Requests (agora com Categoria)
+        const { data: reqData, error: reqError } = await supabase
+            .from('requests')
+            .insert([{ user_id: currentUser.id, title: title, description: desc, category: category }])
+            .select();
+            
+        if (reqError) {
+            alert("Erro no Banco de Dados: " + reqError.message);
+            return;
+        }
         
-    if (reqError) {
-        alert(reqError.message, 'error'); // Assuming showAlert is defined elsewhere, using alert for now.
+        if (!reqData || reqData.length === 0) {
+            alert("A solicitação foi enviada, mas não retornou o protocolo. Verifique suas regras RLS (Policies).");
+            return;
+        }
+        
+        // Dispara Evento Gênesis na Timeline
+        const newReqId = reqData[0].id;
+        const studentName = (currentUser.user_metadata && currentUser.user_metadata.name) ? currentUser.user_metadata.name : 'Estudante';
+        
+        const { error: histError } = await supabase.from('request_history').insert([{
+            request_id: newReqId,
+            actor_name: studentName,
+            action: 'Solicitação Criada',
+            comment: desc
+        }]);
+
+        if (histError) console.error("Falha ao criar o log de histórico:", histError);
+
+        alert('Sua solicitação protocolou com sucesso e já está disponível na mesa!'); 
+        document.getElementById('new-req-form').reset();
+        await loadRequests(); // Regenera a interface da tabela dinamicamente abaixo!
+    } catch (err) {
+        alert("Houve uma falha interna no site: " + err.message);
+    } finally {
         btn.disabled = false;
         btn.innerText = 'Enviar Solicitação';
-        return;
     }
-    
-    // Dispara Evento Gênesis na Timeline
-    const newReqId = reqData[0].id;
-    const studentName = (currentUser.user_metadata && currentUser.user_metadata.name) ? currentUser.user_metadata.name : 'Estudante';
-    
-    await supabase.from('request_history').insert([{
-        request_id: newReqId,
-        actor_name: studentName,
-        action: 'Solicitação Criada Pelo Aluno',
-        comment: desc
-    }]);
-
-    alert('Sua solicitação protocolou com sucesso.', 'success'); // Assuming showAlert is defined elsewhere, using alert for now.
-    document.getElementById('new-req-form').reset();
-    await loadRequests(); // Regenera a interface da tabela dinamicamente abaixo!
-    
-    btn.disabled = false;
-    btn.textContent = 'Enviar Solicitação';
 }
 
 /**
