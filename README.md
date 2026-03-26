@@ -80,18 +80,3 @@ Atividade Avaliativa Low Code/
     ├── supabaseClient.js    # Gateway e Middlewares de Interconexão Cloud.
     └── utils.js             # Módulo Utilitário de Prevenção a XSS (Sanitização) e UX Skeletons.
 ```
-
----
-
-## 🚀 Desdobramento (Hosting & Integração Contínua)
-
-### 1. Ambiente Local
-Se você clonou este repositório isoladamente, a página deve evocar um ambiente de servidor devido aos rígidos CORS de Segurança das subredes Javascript. Instale a extensão externa `Live Server` do VS Code e inicie por ela para os navegadores autorizarem a renderização dos `ESModules`, ou digite `npx serve .` no terminal.
-
-### 2. Publicação e Hospedagem na Nuvem (Netlify + GitHub)
-Para suportar o tráfego da apresentação prática sem limitações de hardwares operacionais, a aplicação foi oficialmente construída e engajada pela malha do **Netlify**, interligada global e ativamente em CI/CD à raiz de controle do **GitHub**.
-
-**O Fluxo Arquitetônico da Apresentação:**
-- **Code Versioning:** O repositório deste projeto está ativamente governado pela sintaxe unificada do Git em máquina nativa.
-- **Continuous Deployment (CI/CD):** Sempre que um disparo de autorização remota (`git push`) afeta as trilhas primárias da Branch `main` no GitHub, um Webhook seguro sinaliza as estruturas CDN da Netlify.
-- **Auto-Rebuilding:** A Netlify extrai perfeitamente as ramificações mais recentes (Vanilla HTML/CSS/JS) sem requisições de compiladores lentos e atualiza as telas em Live. O Link final permanece público, performático, criptograficamente assegurado contra CORS/XSS e interligado por debaixo dos panos às APIs da Edge Network do Banco de Dados (**Supabase Platform**).
