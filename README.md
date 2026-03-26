@@ -30,32 +30,32 @@ Uma plataforma web desenvolvida com **HTML, CSS e JavaScript (Vanilla)** e integ
 ### 1. Vida e Operação - Estudante
 ```mermaid
 graph TD
-    A[Acesso ao Aluno] --> B{Possui Cadastro?}
-    B -- Não --> C[Tela de Registro\nSeleciona Cargo 'Estudante']
-    C --> D[Cria Conta no Supabase Auth + Profiles]
-    D --> E[Virtual Redirect \n(Painel)]
-    B -- Sim --> F[Tela de Login]
-    F --> G[Dashboard do Estudante]
-    G --> H[Visualiza Solicitações Anteriores\nE seus Flags (Status)]
-    G --> I[Gera Nova Solicitação]
-    I --> J[Preenche Título e Descrição]
-    J --> K[O Dashboard Escapa o HTML e Lança pro DB\nStatus Inicial: Pendente]
+    A["Acesso ao Aluno"] --> B{"Possui Cadastro?"}
+    B -- Não --> C["Tela de Registro<br>Seleciona Cargo 'Estudante'"]
+    C --> D["Cria Conta no Supabase Auth + Profiles"]
+    D --> E["Virtual Redirect<br>(Painel)"]
+    B -- Sim --> F["Tela de Login"]
+    F --> G["Dashboard do Estudante"]
+    G --> H["Visualiza Solicitações Anteriores<br>E seus Flags (Status)"]
+    G --> I["Gera Nova Solicitação"]
+    I --> J["Preenche Título e Descrição"]
+    J --> K["O Dashboard Escapa o HTML e Lança pro DB<br>Status Inicial: Pendente"]
     K --> H
 ```
 
 ### 2. Vida e Operação - Educador / Coordenador
 ```mermaid
 graph TD
-    A[Acesso da Coordenação] --> B{Possui Cadastro?}
-    B -- Não --> C[Tela de Registro\nSeleciona Cargo 'Educador']
-    C --> D[Cria Conta no Supabase Auth + Profiles]
-    D --> E[Virtual Redirect \n(Painel Admin)]
-    B -- Sim --> F[Tela de Login Admin]
-    F --> G[Dashboard do Educador]
-    G --> H[Visualiza Pipeline Global\ncom TODAS as Solicitações dos Alunos]
-    H --> I[Verificar Demandas Pendentes]
-    I --> J[Atualizar Status Dropdown no Card\nPendente -> Em análise / Concluída]
-    J --> K[O Script Conecta na Cloud e Exige o PATCH Request]
+    A["Acesso da Coordenação"] --> B{"Possui Cadastro?"}
+    B -- Não --> C["Tela de Registro<br>Seleciona Cargo 'Educador'"]
+    C --> D["Cria Conta no Supabase Auth + Profiles"]
+    D --> E["Virtual Redirect<br>(Painel Admin)"]
+    B -- Sim --> F["Tela de Login Admin"]
+    F --> G["Dashboard do Educador"]
+    G --> H["Visualiza Pipeline Global<br>com TODAS as Solicitações dos Alunos"]
+    H --> I["Verificar Demandas Pendentes"]
+    I --> J["Atualizar Status Dropdown no Card<br>Pendente -> Em análise / Concluída"]
+    J --> K["O Script Conecta na Cloud e Exige o PATCH Request"]
     K --> H
 ```
 
@@ -64,6 +64,7 @@ graph TD
 ## 🗂️ Estrutura de Diretórios da Implementação
 ```text
 Atividade Avaliativa Low Code/
+├── .gitignore               # Arquivamento de pastas e arquivos ignorados no controle de versão Git
 ├── README.md                # Este documento introdutório direcionado aos repositórios de source-control.
 ├── DOCUMENTACAO.md          # Estudo e Documentação Global Avançada Adicional (Infra/V2).
 ├── index.html               # Landing page inicial transparente (Auto-redirecionamento de Stateful Sessions).

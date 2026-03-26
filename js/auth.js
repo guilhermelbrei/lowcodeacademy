@@ -118,7 +118,7 @@ registerForm.addEventListener('submit', async (e) => {
         
         // 2. Transfere a Primary Key referenciável junto aos perfis e o "Caminho Administrativo / Cargo" selecionado.
         const { error: profileError } = await supabase.from('profiles').insert([
-            { id: authUser.id, name: name, role: role } // Removido o insert de email, que não existe na sua tabela SQL.
+            { id: authUser.id, name: name, role: role, email: email }
         ]);
 
         if (profileError) {

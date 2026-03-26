@@ -13,6 +13,8 @@ O Portal Low Academy é um sistema web front-end nativo (HTML/CSS/JS) integrado 
 
 ```text
 Atividade Avaliativa Low Code/
+├── .gitignore               # Arquivamento de arquivos ignorados no controle de versão Git
+├── README.md                # Documento introdutório direcionado aos repositórios de source-control
 ├── DOCUMENTACAO.md          # Esta documentação global do projeto
 ├── index.html               # Landing page inicial transparente (Auto-redirecionamento)
 ├── login.html               # Página de Login e Registro (Abas Intercaladas)
